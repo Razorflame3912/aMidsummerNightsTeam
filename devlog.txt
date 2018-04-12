@@ -4,3 +4,9 @@ Cleaned data file and started writing pyson code to parse it
 chenT -- 2018-04-11 14:51:25
 started html
 
+elsharawyM -- 2018-04-11 21:11:53
+finalized math calculations behind circle generation
+
+elsharawyM -- 2018-04-11 22:46:42
+started d3 circles!
+
