@@ -10,31 +10,44 @@
   </head>
 
   <body>
-    <div class="container">
-      <div class="row">
-	<div class="col-sm-4">
-	  <div class="jumbotron">
-	    <div class="row">
-	      <h2>Shakespeare</h2>
-	    </div>
-	    <div class="row">
-	      <form>
-		<div class="form-row">
-		<div class="col-4">
-		  <input type="text" class="form-control" id="wordsearch" placeholder="Enter a word...">
-		</div>
-		<div class="col">
-		  <center><button type="submit" class="btn btn-primary">Submit</button></center>
-		</div>
-		</div>
-	      </form>
+    <div class="container-fluid">     
+      <div class="col-sm-4">
+	<div class="jumbotron jumbotron-fluid">
+	  <!------------------------Title---------------------------------->
+	  <div class="row">
+	    <img src="title.gif" style="width:270px;height:110px;">
+	  </div>
+	  <!------------------------Search Bar----------------------------->
+	  <div class="row">
+	    <!--------
+	    <form class="form-inline">
+	      <div class="form-group mx-sm-3 mb-2">
+		<input class="form-control" id="search" placeholder="Enter a word...">
+	      </div>
+	      <button type="submit" class="btn btn-primary mb-2">Search!</button>
+	    </form>
+	    ----->
+	    <form>
+	      <div class="col-4">
+		<input type="text" class="form-control" id="search" placeholder="Enter a word...">
+	      </div>
+	      <div class="col">
+		<center><button type="submit" class="btn btn-primary">Search!</button></center>	
+	      </div>
+	    </form>
+	  </div>
+	  <div class="row">
+	    <h3>Arrange by:</h3>
+	    <div class="form-check">
+	      <input class="form-check-input" type="radio" name="killcount" id="killcount" value="option1">
+	      <label class="form-check-label" for="killcount"> Kill Count </label>
 	    </div>
 	  </div>
 	</div>
-	<div class="col-sm-8">
-	  
-	</div>
       </div>
+      <div class="col-sm-8">
+	<!---------d3 html----------------->
+      </div>   
     </div>
   </body>
 
