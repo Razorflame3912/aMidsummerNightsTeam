@@ -17,6 +17,7 @@ var update = function(e){
     var current2 = 0;
     var current3 = 0;
     var mult = 0.65;
+    var bigr = svg.getAttribute("width")/2;
     var data = [];
     if(this.getAttribute("id") == "default"){
 	data = numtopercent(defaultlist);
@@ -38,12 +39,12 @@ var update = function(e){
 		  console.log(current1);
 		  console.log(d);
 		  var x1, y1, x2, y2, x3, y3, M1x, M1y, M2x, M2y, m1, m2, cx;
-		  x1 = (250*mult*Math.cos(current1*Math.PI*2) + 250);
-		  y1 = (250*mult*Math.sin(current1*Math.PI*2) + 250);
-		  x2 = (250*Math.cos((current1 + (d/2))*Math.PI*2) + 250);
-		  y2 = (250*Math.sin((current1 + (d/2))*Math.PI*2) + 250);
-		  x3 = (250*mult*Math.cos((current1+d)*Math.PI*2) + 250);
-		  y3 = (250*mult*Math.sin((current1+d)*Math.PI*2) + 250);
+		  x1 = (bigr*mult*Math.cos(current1*Math.PI*2) + bigr);
+		  y1 = (bigr*mult*Math.sin(current1*Math.PI*2) + bigr);
+		  x2 = (bigr*Math.cos((current1 + (d/2))*Math.PI*2) + bigr);
+		  y2 = (bigr*Math.sin((current1 + (d/2))*Math.PI*2) + bigr);
+		  x3 = (bigr*mult*Math.cos((current1+d)*Math.PI*2) + bigr);
+		  y3 = (bigr*mult*Math.sin((current1+d)*Math.PI*2) + bigr);
 		  if( y2==y1 || y2==y3){
 		      y2++;
 		  }
@@ -87,12 +88,12 @@ var update = function(e){
 		      d=0.0001;
 		  }
 		  var x1, y1, x2, y2, x3, y3, M1x, M1y, M2x, M2y, m1, m2, cx,cy;
-		  x1 = (250*mult*Math.cos(current2*Math.PI*2) + 250);
-		  y1 = (250*mult*Math.sin(current2*Math.PI*2) + 250);
-		  x2 = (250*Math.cos((current2 + (d/2))*Math.PI*2) + 250);
-		  y2 = (250*Math.sin((current2 + (d/2))*Math.PI*2) + 250);
-		  x3 = (250*mult*Math.cos((current2+d)*Math.PI*2) + 250);
-		  y3 = (250*mult*Math.sin((current2+d)*Math.PI*2) + 250);
+		  x1 = (bigr*mult*Math.cos(current2*Math.PI*2) + bigr);
+		  y1 = (bigr*mult*Math.sin(current2*Math.PI*2) + bigr);
+		  x2 = (bigr*Math.cos((current2 + (d/2))*Math.PI*2) + bigr);
+		  y2 = (bigr*Math.sin((current2 + (d/2))*Math.PI*2) + bigr);
+		  x3 = (bigr*mult*Math.cos((current2+d)*Math.PI*2) + bigr);
+		  y3 = (bigr*mult*Math.sin((current2+d)*Math.PI*2) + bigr);
 		  if( y2==y1 || y2==y3){
 		      y2++;
 		  }
@@ -117,12 +118,12 @@ var update = function(e){
 		      d=0.0001;
 		  }
 		  var x1, y1, x2, y2, x3, y3, M1x, M1y, M2x, M2y, m1, m2, cx,cy,r;
-		  x1 = (250*mult*Math.cos(current3*Math.PI*2) + 250);
-		  y1 = (250*mult*Math.sin(current3*Math.PI*2) + 250);
-		  x2 = (250*Math.cos((current3 + (d/2))*Math.PI*2) + 250);
-		  y2 = (250*Math.sin((current3 + (d/2))*Math.PI*2) + 250);
-		  x3 = (250*mult*Math.cos((current3 + d)*Math.PI*2) + 250);
-		  y3 = (250*mult*Math.sin((current3 + d)*Math.PI*2) + 250);
+		  x1 = (bigr*mult*Math.cos(current3*Math.PI*2) + bigr);
+		  y1 = (bigr*mult*Math.sin(current3*Math.PI*2) + bigr);
+		  x2 = (bigr*Math.cos((current3 + (d/2))*Math.PI*2) + bigr);
+		  y2 = (bigr*Math.sin((current3 + (d/2))*Math.PI*2) + bigr);
+		  x3 = (bigr*mult*Math.cos((current3 + d)*Math.PI*2) + bigr);
+		  y3 = (bigr*mult*Math.sin((current3 + d)*Math.PI*2) + bigr);
 		  if( y2==y1 || y2==y3){
 		      y2++;
 		  }
