@@ -2,9 +2,9 @@ var defaultbutton = document.getElementById("default");
 var lengthbutton = document.getElementById("length");
 var svg = document.getElementById("svg");
 var defaultlist = [1,1,1];
-var sizelist = [150,10,60];
+var sizelist = [150,0,60];
 var sizecomedy = [50,10,15,30,10,5,30,0,0,0,0,0,0,0,0,0,0];
-var sizetragedy = [5,2,1,1,1,0,0,0,0,0];
+var sizetragedy = [0,0,0,0,0,0,0,0,0,0];
 var sizehistory = [5,12,13,2,20,1,1,1,1,4];
 
 var defcomedy = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
@@ -144,14 +144,7 @@ var update = function(e){
 	.duration(2000)
 	.attr("cx",
 	      function(d){
-
-		  if(d==0){
-		      d=0.0001;
-		  }
-		  else if(d<0){
-		      d = (1/3);		      
-		      //   console.log("VALUE OF D: " + d);
-		  }
+		  d = zerocheck(d,"big");
 		  var ret = calc(d,"cx",mult,current1,bigr,bigr,bigr);
 		  current1 += d;
 		  listcx[icx]=ret;
@@ -160,14 +153,7 @@ var update = function(e){
 	      })
 	.attr("cy",
 	      function(d){
-		  if(d==0){
-		      d=0.0001;
-		  }
-		  else if(d<0){
-		      d = (1/3);
-		      
-		      //   console.log("VALUE OF D: " + d);
-		  }
+		  d = zerocheck(d,"big");
 		  var ret = calc(d,"cy",mult,current2,bigr,bigr,bigr);
 		  current2 += d;
 		  listcy[icy]=ret;
@@ -178,6 +164,7 @@ var update = function(e){
 	     )
 	.attr("r",
 	      function(d){
+		  d = zerocheck(d,"big");
 		  if(d==0){
 		      d=0.0001;
 		  }
@@ -198,6 +185,26 @@ var update = function(e){
 	subupdate("tragedy",tragedydata,listcx[1],listcy[1],listr[1]);
 	subupdate("history",historydata,listcx[2],listcy[2],listr[2]);
 
+}
+
+var zerocheck = function(d,type){
+    if(d==0){
+	d=0.0001;
+    }
+    else if(d<0){
+	var denominator;
+	if(type=="comedy"){
+	    denominator = 17;
+	}
+	else if(type == "big"){
+	    denominator = 3;
+	}
+	else{
+	    denominator = 10;
+	}
+	d = (1/denominator);		      
+    }
+    return d;
 }
 
 var subupdate = function(type,data,offx,offy,bigr){
@@ -221,40 +228,14 @@ var subupdate = function(type,data,offx,offy,bigr){
 	.duration(2000)
 	.attr("cx",
 	      function(d){
-		  if(d==0){
-		      d=0.0001;
-		  }
-		  else if(d<0){
-		      var denominator;
-		      if(type=="comedy"){
-			  denominator = 17;
-		      }
-		      else{
-			  denominator = 10;
-		      }
-		      d = (1/denominator);		      
-		      //   console.log("VALUE OF D: " + d);
-		  }
+		  d = zerocheck(d,type);
 		  var ret = calc(d,"cx",mult,current1,bigr,offx,offy);
 		  current1 += d;
 		  return ret;
 	      })
 	.attr("cy",
 	      function(d){
-		  if(d==0){
-		      d=0.0001;
-		  }
-		  else if(d<0){
-		      var denominator;
-		      if(type=="comedy"){
-			  denominator = 17;
-		      }
-		      else{
-			  denominator = 10;
-		      }
-		      d = (1/denominator);		      
-		      //   console.log("VALUE OF D: " + d);
-		  }
+		  d = zerocheck(d,type);
 		  var ret = calc(d,"cy",mult,current2,bigr,offx,offy);
 		  current2 += d;
 		  return ret;
@@ -262,20 +243,7 @@ var subupdate = function(type,data,offx,offy,bigr){
 	     )
 	.attr("r",
 	      function(d){
-		  if(d==0){
-		      d=0.0001;
-		  }
-		  else if(d<0){
-		      var denominator;
-		      if(type=="comedy"){
-			  denominator = 17;
-		      }
-		      else{
-			  denominator = 10;
-		      }
-		      d = (1/denominator);		      
-		      //   console.log("VALUE OF D: " + d);
-		  }
+		  d = zerocheck(d,type);
 		  var ret = calc(d,"r",mult,current3,bigr,offx,offy);
 		  current3 += d;
 		  return ret;

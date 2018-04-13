@@ -25,3 +25,6 @@ created dictionary of data, wrote function to find number of words in a play, fi
 elsharawyM -- 2018-04-13 15:24:25
 adjusted d3 to properly deal with 0s
 
+elsharawyM -- 2018-04-13 15:33:00
+factored out code for cleanliness
+
