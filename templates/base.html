@@ -6,19 +6,36 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+    <style>
+      .bg-1 {
+      background-color:ghostwhite;
+      color: #ffffff;
+      }
+      .bg-2 {
+      background-color: ghostwhite;
+      color: #ffffff;
+      }
+      .bg-3 {
+      background-color: lightslategray;
+      color: #ffffff;
+      }
+      .container-fluid {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      }
+    </style> 
   </head>
 
   <body>
     <div class="container-fluid">     
       <div class="col-sm-4">
-	<div class="jumbotron jumbotron-fluid">
+	
 	  <!------------------------Title---------------------------------->
-	  <div class="row">
-	    <img src="title.gif" style="width:270px;height:110px;">
+	  <div class="container-fluid bg-1 text-center">
+	      <img src="title.gif" class="img-responsive" style="width:400px;height:100px;">
 	  </div>
 	  <!------------------------Search Bar----------------------------->
-	  <div class="row">
+	  <div class="container-fluid bg-2 text-center">
 	    <!--------
 	    <form class="form-inline">
 	      <div class="form-group mx-sm-3 mb-2">
@@ -28,6 +45,15 @@
 	    </form>
 	    ----->
 	    <form>
+	      <div class="input-group">
+		<input type="text" class="form-control" size="50" placeholder="Enter a word...">
+		<div class="input-group-btn">
+		  <button type="button" class="btn btn-primary">Search!</button>
+		</div>
+	      </div>
+	    </form>
+	    <!------------------------------------
+	    <form>
 	      <div class="col-4">
 		<input type="text" class="form-control" id="search" placeholder="Enter a word...">
 	      </div>
@@ -35,15 +61,16 @@
 		<center><button type="submit" class="btn btn-primary">Search!</button></center>	
 	      </div>
 	    </form>
+	    ------------------------------>
 	  </div>
-	  <div class="row">
+	  <div class="container-fluid bg-3 text-center">
 	    <h3>Arrange by:</h3>
 	    <div class="form-check">
 	      <input class="form-check-input" type="radio" name="killcount" id="killcount" value="option1">
 	      <label class="form-check-label" for="killcount"> Kill Count </label>
 	    </div>
 	  </div>
-	</div>
+	
       </div>
       <div class="col-sm-8">
 	<!---------d3 html----------------->

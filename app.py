@@ -28,5 +28,14 @@ def numWords(play):
 
 print numWords("Hamlet")
 
+def wordFrequency(target_word, play):
+    count = 0
+    for word in words_dict[play]:
+        if (word.upper() == target_word.upper()):
+            count += 1
+    return count
 
+print wordFrequency("asdf", "Hamlet")
+print wordFrequency("Hamlet", "Hamlet")
+    
 #----------------------------------------------------------------
