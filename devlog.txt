@@ -16,3 +16,6 @@ added more forms in html
 elsharawyM -- 2018-04-12 22:42:22
 added subcircles representing plays
 
+elsharawyM -- 2018-04-13 06:53:46
+fixed a sizing bug
+

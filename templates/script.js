@@ -2,10 +2,11 @@ var defaultbutton = document.getElementById("default");
 var lengthbutton = document.getElementById("length");
 var svg = document.getElementById("svg");
 var defaultlist = [1,1,1];
-var sizelist = [150,60,10];
+var sizelist = [150,10,60];
 var sizecomedy = [50,10,15,30,10,5,30,0,0,0,0,0,0,0,0,0,0];
-var sizetragedy = [5,12,13,2,20,1,1,1,1,4];
-var sizehistory = [5,2,1,1,1,0,0,0,0,0];
+var sizetragedy = [5,2,1,1,1,0,0,0,0,0];
+var sizehistory = [5,12,13,2,20,1,1,1,1,4];
+
 var defcomedy = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 var deftragedy = [1,1,1,1,1,1,1,1,1,1];
 var defhistory = [1,1,1,1,1,1,1,1,1,1];
@@ -165,8 +166,8 @@ var update = function(e){
 	     );
     
 	subupdate("comedy",comedydata,listcx[0],listcy[0],listr[0]);
-	subupdate("tragedy",tragedydata,listcx[2],listcy[2],listr[2]);
-	subupdate("history",historydata,listcx[1],listcy[1],listr[1]);
+	subupdate("tragedy",tragedydata,listcx[1],listcy[1],listr[1]);
+	subupdate("history",historydata,listcx[2],listcy[2],listr[2]);
 
 }
 
