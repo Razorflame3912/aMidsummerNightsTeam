@@ -20,6 +20,13 @@ words_dict = {}
 for title in titles:
     words_dict[title] = plays_list[titles.index(title)]
 
-print words_dict["Hamlet"]
+for play in words_dict:
+    words_dict[play] = words_dict[play].split()
+
+def numWords(play):
+    return len(words_dict[play])
+
+print numWords("Hamlet")
+
     
 #----------------------------------------------------------------
