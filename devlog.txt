@@ -22,3 +22,6 @@ fixed a sizing bug
 marchiniM -- 2018-04-13 07:55:16
 created dictionary of data, wrote function to find number of words in a play, fixed () in the text file
 
+elsharawyM -- 2018-04-13 15:24:25
+adjusted d3 to properly deal with 0s
+
