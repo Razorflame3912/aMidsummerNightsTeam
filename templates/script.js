@@ -108,7 +108,7 @@ var update = function(e){
     var current1 = 0;
     var current2 = 0;
     var current3 = 0;
-    var mult = 0.4;
+    var mult = 0.6;
     var bigr = parseFloat(svg.getAttribute("width"))/2;
     var data = [];
     var comedydata, tragedydata, historydata;
