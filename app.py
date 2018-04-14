@@ -5,6 +5,8 @@ import os
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+app = Flask(__name__)
+
 #-----------------------DATA MANIPULATION------------------------
 
 text_file = open("shakespeare.txt", "r")
@@ -31,11 +33,52 @@ print numWords("Hamlet")
 def wordFrequency(target_word, play):
     count = 0
     for word in words_dict[play]:
+        if (word[len(word)-1] == "'"):
+            word = word[:len(word)-1]
         if (word.upper() == target_word.upper()):
             count += 1
     return count
 
-print wordFrequency("asdf", "Hamlet")
-print wordFrequency("Hamlet", "Hamlet")
+def numUniqueWords(play):
+    count = 0
+    words = []
+    for word in words_dict[play]:
+        if (word not in words):
+            words.append(word)
+            count += 1
+    return count 
+
+print numUniqueWords("Hamlet")
+#print wordFrequency("Hamlet", "Hamlet")
     
+#----------------------------------------------------------------
+
+#---------------------------FLASK APP----------------------------
+
+@app.route('/')
+def root(): #root based on number of words total
+    num_dict = {}
+    for play in titles:
+        vocab_dict[play] = numWords(play)
+    return redirect(url_for('base', num_words = num_dict))
+
+@app.route('/search')
+def search():
+    word = request.args['word']
+    frequency_dict = {}
+    for play in titles:
+        frequency_dict[play] = wordFrequency(word, play)
+    return redirect(url_for('base', frequencies = frequency_dict))
+
+@app.route('/vocab') #processes for complexity of vocab (number of unique words)
+def vocab():
+    vocab_dict = {}
+    for play in titles:
+        vocab_dict[play] = numUniqueWords(play)
+    return redirect(url_for('base', complexity = vocab_dict))
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()                   
+
 #----------------------------------------------------------------

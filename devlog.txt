@@ -28,3 +28,6 @@ adjusted d3 to properly deal with 0s
 elsharawyM -- 2018-04-13 15:33:00
 factored out code for cleanliness
 
+marchiniM -- 2018-04-14 01:18:41
+wrote word frequency function, wrote number of unique words function, cleaned data...again, wrote basic flask app
+
