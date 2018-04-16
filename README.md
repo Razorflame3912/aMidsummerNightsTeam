@@ -1,7 +1,7 @@
 # aMidsummerNightsTeam
 
 ## Our Data Set:
-We aim to utilize the data set of The Complete Works of William Shakespeare! Through the link provided below, the text file contains every one of Shakespeare's plays, which we will use in terms of analyzing word frequency and variety in vocabulary.
+We aim to utilize the data set of The Complete Works of William Shakespeare! Through the link provided below, the text file contains  every one of Shakespeare's plays, which we will use in terms of analyzing word frequency and variety in vocabulary.
 Source: https://ocw.mit.edu/ans7870/6/6.006/s08/lecturenotes/files/t8.shakespeare.txt
 
 ## Our Visualization
