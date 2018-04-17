@@ -59,8 +59,8 @@ print numUniqueWords("Hamlet")
 def root(): #root based on number of words total
     num_dict = {}
     for play in titles:
-        vocab_dict[play] = numWords(play)
-    return redirect(url_for('base', num_words = num_dict))
+        num_dict[play] = numWords(play)
+    return render_template('base.html', num_words = num_dict)
 
 @app.route('/search')
 def search():
@@ -68,14 +68,14 @@ def search():
     frequency_dict = {}
     for play in titles:
         frequency_dict[play] = wordFrequency(word, play)
-    return redirect(url_for('base', frequencies = frequency_dict))
+    return render_template('base.html', frequencies = frequency_dict)
 
 @app.route('/vocab') #processes for complexity of vocab (number of unique words)
 def vocab():
     vocab_dict = {}
     for play in titles:
         vocab_dict[play] = numUniqueWords(play)
-    return redirect(url_for('base', complexity = vocab_dict))
+    return render_template('base.html', complexity = vocab_dict)
 
 if __name__ == '__main__':
     app.debug = True
