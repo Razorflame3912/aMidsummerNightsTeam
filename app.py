@@ -82,7 +82,7 @@ def search():
     final_list.append(comedy)
     final_list.append(tragedy)
     final_list.append(history)
-    return final_list
+    return json.dump(final_list)
 
 @app.route('/vocab') #processes for complexity of vocab (number of unique words)
 def vocab():
@@ -104,7 +104,7 @@ def vocab():
     final_list.append(comedy)
     final_list.append(tragedy)
     final_list.append(history)
-    return final_list
+    return json.dump(final_list)
 
 @app.route('/count')
 def count():
@@ -126,7 +126,7 @@ def count():
     final_list.append(comedy)
     final_list.append(tragedy)
     final_list.append(history)
-    return final_list
+    return json.dump(final_list)
 
 
 
