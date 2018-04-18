@@ -3,11 +3,11 @@ var lengthbutton = document.getElementById("length");
 var svg = document.getElementById("svg");
 var defaultlist = [1,1,1];
 var sizelist = [150,0,60];
-var sizecomedy = [50,10,15,30,10,5,30,0,0,0,0,0,0,0,0,0,0];
+var sizecomedy = [50,10,15,30,10,5,30,0,0,0,0,0,0,0,0,0];
 var sizetragedy = [0,0,0,0,0,0,0,0,0,0];
 var sizehistory = [5,12,13,2,20,1,1,1,1,4];
 
-var defcomedy = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+var defcomedy = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 var deftragedy = [1,1,1,1,1,1,1,1,1,1];
 var defhistory = [1,1,1,1,1,1,1,1,1,1];
 
