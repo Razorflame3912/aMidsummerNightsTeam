@@ -3,7 +3,8 @@
 
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
@@ -26,7 +27,7 @@
     </style> 
   </head>
 
-  <body style="background-color:white;">
+  <body style="background-color:gainsboro;">
     <div class="container-fluid">     
       <div class="col-sm-4">
 	
@@ -52,28 +53,26 @@
 		</div>
 	      </div>
 	    </form>
-	    <!------------------------------------
-	    <form>
-	      <div class="col-4">
-		<input type="text" class="form-control" id="search" placeholder="Enter a word...">
-	      </div>
-	      <div class="col">
-		<center><button type="submit" class="btn btn-primary">Search!</button></center>	
-	      </div>
-	    </form>
-	    ------------------------------>
 	  </div>
-	  <div class="container-fluid bg-3 text-center">
-	    <h3>Arrange by:</h3>
-	    <div class="form-check">
-	      <input class="form-check-input" type="radio" name="wordcount" id="killcount" value="option1">
-	      <label class="form-check-label" for="killcount"> Word Count </label>
-	      <br>
-	      <input class="form-check-input" type="radio" name="variety" id="variety" value="option2">
-	      <label class="form-check-label" for="variety"> Word Variety </label>
+	  <div class="container-fluid bg-3 text-center" style="font-family:roboto">
+	    <h3 style="font-family:roboto">Arrange by:</h3>
+	    <div class="radio">
+	      <label><input type="radio" name="optradio">Word Variety</label>
+	    </div>
+	    <div class="radio">
+	      <label><input type="radio" name="optradio">Word Count</label>
 	    </div>
 	  </div>
-	
+	  <div class="container-fluid bg-3 text-center" style="font-family:roboto">
+	    <h3 style="font-family:roboto">How To Use:</h3>
+	    <p style="font-family:roboto">
+	      <ul>
+		<li>To find relative count of a specific word, type your word into the search bar and click Search!</li>
+		<li>For other options, select a button and the circles will move accordingly.</li>
+		<li>Enjoy!</li>
+	      </ul>
+	    </p>
+	  </div>
       </div>
       <div class="col-sm-8">
 	<!---------d3 html----------------->

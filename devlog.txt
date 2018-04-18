@@ -31,3 +31,6 @@ factored out code for cleanliness
 marchiniM -- 2018-04-14 01:18:41
 wrote word frequency function, wrote number of unique words function, cleaned data...again, wrote basic flask app
 
+chenT -- 2018-04-18 14:49:16
+changed radio buttons and added how to use
+
