@@ -57,10 +57,10 @@
 	  <div class="container-fluid bg-3 text-center" style="font-family:roboto">
 	    <h3 style="font-family:roboto">Arrange by:</h3>
 	    <div class="radio">
-	      <label><input type="radio" name="optradio">Word Variety</label>
+	      <label><input type="radio" name="optradio" id="default">Word Variety</label>
 	    </div>
 	    <div class="radio">
-	      <label><input type="radio" name="optradio">Word Count</label>
+	      <label><input type="radio" name="optradio" id="length">Word Count</label>
 	    </div>
 	  </div>
 	  <div class="container-fluid bg-3 text-center" style="font-family:roboto">
@@ -76,6 +76,63 @@
       </div>
       <div class="col-sm-8">
 	<!---------d3 html----------------->
+	<svg height="750" width="750" id="svg" xlmns="http://www.w3.org/2000/svg">
+	  <circle cy="375" cx="375" r="375" fill="white" stroke="black"></circle>
+
+	  <!-- CATEGORY BUBBLES-->
+	  <circle class="category" id="comedybubble" cy="375" cx="375" r="0" fill="rgba(148, 249, 104,0.5)" stroke="rgb(112, 191, 78)" stroke-width="3"></circle>
+	  <circle class="category" id="tragedybubble" cy="375" cx="375" r="0" fill="rgba(239, 115, 115,0.5)" stroke="rgb(206, 92, 92)" stroke-width="3"></circle>
+	  <circle class="category" id="historybubble" cy="375" cx="375" r="0" fill="rgba(90, 215, 221,0.5)" stroke="rgb(66, 166, 170)" stroke-width="3"></circle>
+
+	  <!-- COMEDIES -->
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="comedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+
+	  <!-- TRAGEDIES -->
+	  <circle class="tragedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="tragedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="tragedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="tragedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="tragedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="tragedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="tragedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="tragedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="tragedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="tragedy" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+
+	  <!-- HISTORIES -->
+	  <circle class="history" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="history" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="history" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="history" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="history" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="history" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="history" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="history" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="history" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+	  <circle class="history" cx="375" cy="375" r="0" fill="rgba(100,100,100,0.5)" stroke="black" stroke-width="3"></circle>
+
+	</svg>
+	<br>
+	<!--	<input type="radio" name="status" value="default" id="default"> Evenly Sized<br>
+<input type="radio" name="status" value="length" id="length"> Sized by Length<br>-->
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script type="text/javascript" src="/static/script.js"></script>
       </div>   
     </div>
   </body>
