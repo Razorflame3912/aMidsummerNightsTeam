@@ -17,9 +17,11 @@ plays_list = full_text.split('the_end')
 
 titles = ["All's Well That Ends Well", "Antony and Cleopatra", "As You Like It", "The Comedy of Errors", "Coriolanus", "Cymbeline", "Hamlet", "Henry IV, Part 1", "Henry IV, Part 2", "Henry V", "Henry VI, Part 1", "Henry VI, Part 2", "Henry VI, Part 3", "Henry VIII", "King John", "Julius Caesar", "King Lear", "Love's Labour's Lost", "Macbeth", "Measure For Measure", "The Merchant of Venice", "The Merry Wives of Windsor", "A Midsummer Night's Dream", "Much Ado About Nothing", "Othello", "Richard II", "Richard III", "Romeo and Juliet", "The Taming of the Shrew", "The Tempest", "Timon of Athens", "Titus Andronicus", "Troilus and Cressida", "Twelfth Night", "The Two Gentlemen of Verona", "The Winter's Tale"]
 
-comedies = ["All's Well That Ends Well", "As You Like It", "The Comedy of Errors", "Love's Labour's Lost", "Measure For Measure", "The Merchant of Venice", "The Merry Wives of Windsor", "A Midsummer Night's Dream", "Much Ado About Nothing","The Taming of the Shrew", "The Tempest", "Twelfth Night", "The Two Gentlemen of Verona", "The Winter's Tale"]
+comedies = ["All's Well That Ends Well", "As You Like It", "The Comedy of Errors", "Cymbeline", "Love's Labour's Lost", "Measure For Measure", "The Merchant of Venice", "The Merry Wives of Windsor", "A Midsummer Night's Dream", "Much Ado About Nothing","The Taming of the Shrew", "The Tempest", "Troilus and Cressida", "Twelfth Night", "The Two Gentlemen of Verona", "The Winter's Tale"]
 
-tragedies = ["Antony and Cleopatra", "Coriolanus", "Cymbeline"]
+tragedies = ["Antony and Cleopatra", "Coriolanus", "Hamlet", "Julius Caesar", "King Lear", "Macbeth", "Othello", "Romeo and Juliet", "Timon of Athens", "Titus Andronicus"]
+
+histories = ["Henry IV, Part 1", "Henry IV, Part 2", "Henry V", "Henry VI, Part 1", "Henry VI, Part 2", "Henry VI, Part 3", "Henry VIII", "King John","Richard II", "Richard III"]
 
 words_dict = {}
 
@@ -31,8 +33,6 @@ for play in words_dict:
 
 def numWords(play):
     return len(words_dict[play])
-
-print numWords("Hamlet")
 
 def wordFrequency(target_word, play):
     count = 0
@@ -52,8 +52,6 @@ def numUniqueWords(play):
             count += 1
     return count 
 
-print numUniqueWords("Hamlet")
-#print wordFrequency("Hamlet", "Hamlet")
     
 #----------------------------------------------------------------
 
@@ -61,25 +59,76 @@ print numUniqueWords("Hamlet")
 
 @app.route('/')
 def root(): #root based on number of words total
-    num_dict = {}
-    for play in titles:
-        num_dict[play] = numWords(play)
-    return render_template('base.html', num_words = num_dict)
+    return render_template('base.html')
 
 @app.route('/search')
 def search():
     word = request.args['word']
-    frequency_dict = {}
-    for play in titles:
-        frequency_dict[play] = wordFrequency(word, play)
-    return render_template('base.html', frequencies = frequency_dict)
+    count_list = [0, 0, 0]
+    comedy = []
+    tragedy = []
+    history = []
+    for title in comedies:
+        comedy.append(wordFrequency(word,title))
+        count_list[0] += wordFrequency(word,title)
+    for title in tragedies:
+        tragedy.append(wordFrequency(word,title))
+        count_list[1] += wordFrequency(word,title)
+    for title in histories:
+        history.append(wordFrequency(word,title))
+        count_list[2] += wordFrequency(word,title)
+    final_list = []
+    final_list.append(count_list)
+    final_list.append(comedy)
+    final_list.append(tragedy)
+    final_list.append(history)
+    return final_list
 
 @app.route('/vocab') #processes for complexity of vocab (number of unique words)
 def vocab():
-    vocab_dict = {}
-    for play in titles:
-        vocab_dict[play] = numUniqueWords(play)
-    return render_template('base.html', complexity = vocab_dict)
+    count_list = [0, 0, 0]
+    comedy = []
+    tragedy = []
+    history = []
+    for title in comedies:
+        comedy.append(numUniqueWords(title))
+        count_list[0] += numUniqueWords(title)
+    for title in tragedies:
+        tragedy.append(numUniqueWords(title))
+        count_list[1] += numUniqueWords(title)
+    for title in histories:
+        history.append(numUniqueWords(title))
+        count_list[2] += numUniqueWords(title)
+    final_list = []
+    final_list.append(count_list)
+    final_list.append(comedy)
+    final_list.append(tragedy)
+    final_list.append(history)
+    return final_list
+
+@app.route('/count')
+def count():
+    count_list = [0, 0, 0]
+    comedy = []
+    tragedy = []
+    history = []
+    for title in comedies:
+        comedy.append(numWords(title))
+        count_list[0] += numWords(title)
+    for title in tragedies:
+        tragedy.append(numWords(title))
+        count_list[1] += numWords(title)
+    for title in histories:
+        history.append(numWords(title))
+        count_list[2] += numWords(title)
+    final_list = []
+    final_list.append(count_list)
+    final_list.append(comedy)
+    final_list.append(tragedy)
+    final_list.append(history)
+    return final_list
+
+
 
 if __name__ == '__main__':
     app.debug = True
