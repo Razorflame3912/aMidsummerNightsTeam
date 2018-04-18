@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 import sys
 import os
+import json
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -82,7 +83,7 @@ def search():
     final_list.append(comedy)
     final_list.append(tragedy)
     final_list.append(history)
-    return json.dump(final_list)
+    return json.dumps(final_list)
 
 @app.route('/vocab') #processes for complexity of vocab (number of unique words)
 def vocab():
@@ -104,7 +105,7 @@ def vocab():
     final_list.append(comedy)
     final_list.append(tragedy)
     final_list.append(history)
-    return json.dump(final_list)
+    return json.dumps(final_list)
 
 @app.route('/count')
 def count():
@@ -126,7 +127,7 @@ def count():
     final_list.append(comedy)
     final_list.append(tragedy)
     final_list.append(history)
-    return json.dump(final_list)
+    return json.dumps(final_list)
 
 
 

@@ -3,9 +3,10 @@ var lengthbutton = document.getElementById("length");
 var svg = document.getElementById("svg");
 var defaultlist = [1,1,1];
 var sizelist = [150,0,60];
-var sizecomedy = [50,10,15,30,10,5,30,0,0,0,0,0,0,0,0,0];
-var sizetragedy = [0,0,0,0,0,0,0,0,0,0];
-var sizehistory = [5,12,13,2,20,1,1,1,1,4];
+var variabledata = [[150,0,60],
+		    [50,10,15,30,10,5,30,0,0,0,0,0,0,0,0,0],
+		    [0,0,0,0,0,0,0,0,0,0],
+		    [5,12,13,2,20,1,1,1,1,4]];
 
 var defcomedy = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 var deftragedy = [1,1,1,1,1,1,1,1,1,1];
@@ -81,28 +82,28 @@ var calc = function(d,arg,mult,current,bigr,offx,offy){
     cx = (M1y - M2y + (m2*M2x) - (m1*M1x))/(m2-m1);
     cy = M1y + (m1*(cx-M1x));
     r = Math.sqrt(((cx-x1)*(cx-x1)) + ((cy-y1)*(cy-y1)));
-    //console.log(x1);
-    //console.log(y1);
-    //console.log(x2);
-    //console.log(y2);
-    //console.log(x3);
-    //console.log(y3);
-    //console.log(M1x);
-    //console.log(M1y);
-    //console.log(M2x);
-    //console.log(M2y);
-    //console.log(m1);
-    //console.log(m2);
+    console.log(x1);
+    console.log(y1);
+    console.log(x2);
+    console.log(y2);
+    console.log(x3);
+    console.log(y3);
+    console.log(M1x);
+    console.log(M1y);
+    console.log(M2x);
+    console.log(M2y);
+    console.log(m1);
+    console.log(m2);
     if(arg=="cx"){
-	//console.log(cx);
+	console.log(cx);
 	return cx;
     }
     else if(arg=="cy"){
-	//console.log(cy);
+	console.log(cy);
 	return cy;
     }
     else{
-	//console.log(r);
+	console.log(r);
 	return r;
     }
     
@@ -124,6 +125,7 @@ var update = function(e){
     var icx = 0;
     var icy = 0;
     var ir = 0;
+    
     if(this.getAttribute("id") == "default"){
 	data = numtopercent(defaultlist);
 	comedydata = numtopercent(defcomedy);
@@ -131,10 +133,20 @@ var update = function(e){
 	historydata = numtopercent(defhistory);
     }
     else{
-	data = numtopercent(sizelist);
-	comedydata = numtopercent(sizecomedy);
-	tragedydata = numtopercent(sizetragedy);
-	historydata = numtopercent(sizehistory);
+	$.ajax({
+	    async: false,
+	    url: '/count',
+	    data : {},
+	    type: 'GET',
+	    success: function(d) {
+		console.log(d);
+		variabledata = JSON.parse(d);
+	    } //end success callback
+	});//end ajax call
+	data = numtopercent(variabledata[0]);
+	comedydata = numtopercent(variabledata[1]);
+	tragedydata = numtopercent(variabledata[2]);
+	historydata = numtopercent(variabledata[3]);
     }
     //console.log(data);
     var circles = d3.select("#svg").selectAll("circle.category");
