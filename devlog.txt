@@ -34,3 +34,6 @@ wrote word frequency function, wrote number of unique words function, cleaned da
 chenT -- 2018-04-18 14:49:16
 changed radio buttons and added how to use
 
+marchiniM -- 2018-04-18 16:22:25
+Fixed backend to work with ajax calls and return lists for d3
+
