@@ -5,6 +5,7 @@ var wordbutton = document.getElementById("word");
 var wordbar = document.getElementById("wordbar");
 var svg = document.getElementById("svg");
 var circs = document.getElementsByTagName("circle");
+var plays = $(".comedy, .tragedy, .history");
 var circsizelist = [];
 var searchedword = "";
 var defaultlist = [1,1,1];
@@ -17,6 +18,10 @@ var variabledata = [[150,0,60],
 var defcomedy = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 var deftragedy = [1,1,1,1,1,1,1,1,1,1];
 var defhistory = [1,1,1,1,1,1,1,1,1,1];
+var circles = d3.select("#svg").selectAll("circle.category");
+var comedycircles = d3.select("#svg").selectAll("circle.comedy");
+var tragedycircles = d3.select("#svg").selectAll("circle.tragedy");
+var historycircles = d3.select("#svg").selectAll("circle.history");
 
 
 var numtopercent = function(list){
@@ -187,7 +192,6 @@ var update = function(e){
 	    historydata = numtopercent(variabledata[3]);
 	}
 	//console.log(data);
-	var circles = d3.select("#svg").selectAll("circle.category");
 
 	circles.data(data)
 	    .transition()
@@ -234,6 +238,7 @@ var update = function(e){
 	subupdate("comedy",comedydata,listcx[0],listcy[0],listr[0]);
 	subupdate("tragedy",tragedydata,listcx[1],listcy[1],listr[1]);
 	subupdate("history",historydata,listcx[2],listcy[2],listr[2]);
+	setTimeout(reorder,2001);
     }
 
 }
@@ -270,14 +275,22 @@ var subupdate = function(type,data,offx,offy,bigr){
     var offx = parseFloat(parentcircle.getAttribute("cx"));
     var offy = parseFloat(parentcircle.getAttribute("cy"));
     var bigr = parseFloat(parentcircle.getAttribute("r"));*/
-    var circles = d3.select("#svg").selectAll("circle."+type);
+    var selectedcircs;
     //console.log(offx);
     //console.log(offy);
     //console.log(bigr);
     //console.log(circles);
     //console.log(data);
-    
-    circles.data(data)
+    if(type == "comedy"){
+	selectedcircs = comedycircles;
+    }
+    else if (type == "tragedy"){
+	selectedcircs = tragedycircles;
+    }
+    else{
+	selectedcircs = historycircles;
+    }
+    selectedcircs.data(data)
 	.transition()
 	.duration(2000)
 	.attr("cx",
@@ -303,9 +316,30 @@ var subupdate = function(type,data,offx,offy,bigr){
 		  return ret;
 	      }
 	     );
-    
+
 }
 
+var reorder = function(){
+    var circlist = [];
+    while ($("circle").length > 0){
+	//console.log(document.getElementsByTagName("circle"));
+	//console.log(document.getElementsByTagName("circle").length);
+	circlist.push($("circle")[$("circle").length -1]);
+	console.log(circlist);
+	//console.log(svg.childNodes);
+	svg.removeChild(circlist[circlist.length-1]);
+    }
+    console.log(circlist);
+
+    
+    circlist.sort(function(a,b){return parseFloat(a.getAttribute("r")) - parseFloat(b.getAttribute("r"));});
+    
+    while (circlist.length > 0){
+	svg.appendChild(circlist.pop());
+    }
+    
+
+}
 var getinfo = function(e){
     //circsizelist = [];
     circsizelist.push(this.getAttribute("r"));
@@ -323,12 +357,12 @@ var dehighlight = function(e){
     this.setAttribute("opacity","1");
 	//e.stopPropagation();
 };
-console.log(circs);
-for(var i = 0; i < circs.length; i++){
-    console.log(circs[i]);
+//console.log(circs);
+for(var i = 0; i < plays.length; i++){
+    console.log(plays[i]);
     //circs[i].addEventListener("mouseover",getinfo,true);
-    circs[i].addEventListener("mouseover",highlight,false);
-    circs[i].addEventListener("mouseout",dehighlight,false);
+    plays[i].addEventListener("mouseover",highlight,false);
+    plays[i].addEventListener("mouseout",dehighlight,false);
 }
 
 defaultbutton.addEventListener("click",update);
