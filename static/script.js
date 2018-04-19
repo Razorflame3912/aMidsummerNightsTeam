@@ -313,7 +313,14 @@ var getinfo = function(e){
 }
 
 var highlight = function(e){
-	console.log(this.getAttribute("r"));
+    console.log(this.getAttribute("r"));
+    this.setAttribute("opacity","0.25");
+	//e.stopPropagation();
+};
+
+var dehighlight = function(e){
+    console.log(this.getAttribute("r"));
+    this.setAttribute("opacity","1");
 	//e.stopPropagation();
 };
 console.log(circs);
@@ -321,6 +328,7 @@ for(var i = 0; i < circs.length; i++){
     console.log(circs[i]);
     //circs[i].addEventListener("mouseover",getinfo,true);
     circs[i].addEventListener("mouseover",highlight,false);
+    circs[i].addEventListener("mouseout",dehighlight,false);
 }
 
 defaultbutton.addEventListener("click",update);
