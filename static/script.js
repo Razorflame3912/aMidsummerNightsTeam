@@ -1,6 +1,10 @@
 var defaultbutton = document.getElementById("default");
 var lengthbutton = document.getElementById("length");
+var vocabbutton = document.getElementById("vocab");
+var wordbutton = document.getElementById("word");
+var wordbar = document.getElementById("wordbar");
 var svg = document.getElementById("svg");
+var searchedword = "";
 var defaultlist = [1,1,1];
 var sizelist = [150,0,60];
 var variabledata = [[150,0,60],
@@ -79,10 +83,13 @@ var calc = function(d,arg,mult,current,bigr,offx,offy){
     M2y = 0.5*(y2+y3);
     m1 = (x1-x2)/(y2-y1);
     m2 = (x2-x3)/(y3-y2);
+    if(m1==m2){
+	m1+= 0.01;
+    }
     cx = (M1y - M2y + (m2*M2x) - (m1*M1x))/(m2-m1);
     cy = M1y + (m1*(cx-M1x));
     r = Math.sqrt(((cx-x1)*(cx-x1)) + ((cy-y1)*(cy-y1)));
-    console.log(x1);
+    /*console.log(x1);
     console.log(y1);
     console.log(x2);
     console.log(y2);
@@ -93,17 +100,17 @@ var calc = function(d,arg,mult,current,bigr,offx,offy){
     console.log(M2x);
     console.log(M2y);
     console.log(m1);
-    console.log(m2);
+    console.log(m2);*/
     if(arg=="cx"){
-	console.log(cx);
+	//console.log(cx);
 	return cx;
     }
     else if(arg=="cy"){
-	console.log(cy);
+	//console.log(cy);
 	return cy;
     }
     else{
-	console.log(r);
+	//console.log(r);
 	return r;
     }
     
@@ -112,90 +119,120 @@ var calc = function(d,arg,mult,current,bigr,offx,offy){
 
 
 var update = function(e){
-    var current1 = 0;
-    var current2 = 0;
-    var current3 = 0;
-    var mult = 0.6;
-    var bigr = parseFloat(svg.getAttribute("width"))/2;
-    var data = [];
-    var comedydata, tragedydata, historydata;
-    var listcx = [0,0,0];
-    var listcy = [0,0,0];
-    var listr = [0,0,0];
-    var icx = 0;
-    var icy = 0;
-    var ir = 0;
-    
-    if(this.getAttribute("id") == "default"){
-	data = numtopercent(defaultlist);
-	comedydata = numtopercent(defcomedy);
-	tragedydata = numtopercent(deftragedy);
-	historydata = numtopercent(defhistory);
-    }
-    else{
-	$.ajax({
-	    async: false,
-	    url: '/count',
-	    data : {},
-	    type: 'GET',
-	    success: function(d) {
-		console.log(d);
-		variabledata = JSON.parse(d);
-	    } //end success callback
-	});//end ajax call
-	data = numtopercent(variabledata[0]);
-	comedydata = numtopercent(variabledata[1]);
-	tragedydata = numtopercent(variabledata[2]);
-	historydata = numtopercent(variabledata[3]);
-    }
-    //console.log(data);
-    var circles = d3.select("#svg").selectAll("circle.category");
+    //console.log((e));
+    if((e.type == "keydown" && e.key=="Enter") || e.type == "click"){
+	var current1 = 0;
+	var current2 = 0;
+	var current3 = 0;
+	var mult = 0.6;
+	var bigr = parseFloat(svg.getAttribute("width"))/2;
+	var data = [];
+	var comedydata, tragedydata, historydata;
+	var listcx = [0,0,0];
+	var listcy = [0,0,0];
+	var listr = [0,0,0];
+	var icx = 0;
+	var icy = 0;
+	var ir = 0;
+	searchedword = wordbar.value;
+	if(this.getAttribute("id") == "default"){
+	    data = numtopercent(defaultlist);
+	    comedydata = numtopercent(defcomedy);
+	    tragedydata = numtopercent(deftragedy);
+	    historydata = numtopercent(defhistory);
+	}
+	else{
+	    if (this.getAttribute("id") == "length"){
+		$.ajax({
+		    async: false,
+		    url: '/count',
+		    data : {},
+		    type: 'GET',
+		    success: function(d) {
+			console.log(d);
+			variabledata = JSON.parse(d);
+		    } //end success callback
+		});//end ajax call
+	    }
+	    else if(this.getAttribute("id") == "vocab"){
+		$.ajax({
+		    async: false,
+		    url: '/vocab',
+		    data : {},
+		    type: 'GET',
+		    success: function(d) {
+			console.log(d);
+			variabledata = JSON.parse(d);
+		    } //end success callback
+		});//end ajax call
+	    }
+	    else{
+		$.ajax({
+		    async: false,
+		    url: '/search',
+		    data : {word : searchedword},
+		    type: 'GET',
+		    success: function(d) {
+			console.log(d);
+			variabledata = JSON.parse(d);
+		    } //end success callback
+		});//end ajax call
+	    }
+	    
+	    data = numtopercent(variabledata[0]);
+	    comedydata = numtopercent(variabledata[1]);
+	    tragedydata = numtopercent(variabledata[2]);
+	    historydata = numtopercent(variabledata[3]);
+	}
+	//console.log(data);
+	var circles = d3.select("#svg").selectAll("circle.category");
 
-    circles.data(data)
-	.transition()
-	.duration(2000)
-	.attr("cx",
-	      function(d){
-		  d = zerocheck(d,"big");
-		  var ret = calc(d,"cx",mult,current1,bigr,bigr,bigr);
-		  current1 += d;
-		  listcx[icx]=ret;
-		  icx += 1;
-		  return ret;
-	      })
-	.attr("cy",
-	      function(d){
-		  d = zerocheck(d,"big");
-		  var ret = calc(d,"cy",mult,current2,bigr,bigr,bigr);
-		  current2 += d;
-		  listcy[icy]=ret;
-		  icy += 1;
+	circles.data(data)
+	    .transition()
+	    .duration(2000)
+	    .attr("cx",
+		  function(d){
+		      d = zerocheck(d,"big");
+		      var ret = calc(d,"cx",mult,current1,bigr,bigr,bigr);
+		      current1 += d;
+		      listcx[icx]=ret;
+		      icx += 1;
+		      return ret;
+		  })
+	    .attr("cy",
+		  function(d){
+		      d = zerocheck(d,"big");
+		      var ret = calc(d,"cy",mult,current2,bigr,bigr,bigr);
+		      current2 += d;
+		      listcy[icy]=ret;
+		      icy += 1;
 
-		  return ret;
-	      }
-	     )
-	.attr("r",
-	      function(d){
-		  d = zerocheck(d,"big");
-		  if(d==0){
-		      d=0.0001;
+		      return ret;
 		  }
-		  else if(d<0){
-		      d = (1/3);
-		      
-		   //   console.log("VALUE OF D: " + d);
+		 )
+	    .attr("r",
+		  function(d){
+		      d = zerocheck(d,"big");
+		      if(d==0){
+			  d=0.0001;
+		      }
+		      else if(d<0){
+			  d = (1/3);
+			  
+			  //   console.log("VALUE OF D: " + d);
+		      }
+		      var ret = calc(d,"r",mult,current3,bigr,bigr,bigr);
+		      current3 += d;
+		      listr[ir]=ret;
+		      ir += 1;
+		      return ret;
 		  }
-		  var ret = calc(d,"r",mult,current3,bigr,bigr,bigr);
-		  current3 += d;
-		  listr[ir]=ret;
-		  ir += 1;
-		  return ret;
-	      }
-	     );
-    
+		 );
+	
 	subupdate("comedy",comedydata,listcx[0],listcy[0],listr[0]);
 	subupdate("tragedy",tragedydata,listcx[1],listcy[1],listr[1]);
 	subupdate("history",historydata,listcx[2],listcy[2],listr[2]);
+    }
 
 }
 
@@ -203,10 +240,13 @@ var zerocheck = function(d,type){
     if(d==0){
 	d=0.0001;
     }
+    if(d==1){
+	d=0.9999;
+    }
     else if(d<0){
 	var denominator;
 	if(type=="comedy"){
-	    denominator = 17;
+	    denominator = 16;
 	}
 	else if(type == "big"){
 	    denominator = 3;
@@ -264,5 +304,9 @@ var subupdate = function(type,data,offx,offy,bigr){
     
 }
 
+
 defaultbutton.addEventListener("click",update);
 lengthbutton.addEventListener("click",update);
+vocabbutton.addEventListener("click",update);
+wordbutton.addEventListener("click", update);
+wordbar.addEventListener("keydown", update);
