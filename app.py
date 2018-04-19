@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for, f
 import sys
 import os
 import json
+import datetime
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -46,14 +47,46 @@ def wordFrequency(target_word, play):
 
 def numUniqueWords(play):
     count = 0
-    words = []
+    multiples = []
     for word in words_dict[play]:
-        if (word not in words):
-            words.append(word)
-            count += 1
-    #print count
-    return count 
+        if words_dict[play].count(word) == 1:
+	    count += 1
+	else:
+	    if word not in multiples:
+		count += 1
+		multiples.append(word)
+    return count
 
+#print numUniqueWords("Hamlet") 
+
+
+def vocabF():
+    count_list = [0, 0, 0]
+    comedy = []
+    tragedy = []
+    history = []
+    for title in comedies:
+	cWords = numUniqueWords(title)
+        comedy.append(cWords)
+        count_list[0] += cWords
+    for title in tragedies:
+	tWords = numUniqueWords(title)
+        tragedy.append(tWords)
+        count_list[1] += tWords
+    for title in histories:
+	hWords = numUniqueWords(title)
+        history.append(hWords)
+        count_list[2] += hWords
+    final_list = []
+    final_list.append(count_list)
+    final_list.append(comedy)
+    final_list.append(tragedy)
+    final_list.append(history)
+    return json.dumps(final_list)
+
+print datetime.datetime.now().time()
+print vocabF()
+print datetime.datetime.now().time()
     
 #----------------------------------------------------------------
 
@@ -71,14 +104,17 @@ def search():
     tragedy = []
     history = []
     for title in comedies:
-        comedy.append(wordFrequency(word,title))
-        count_list[0] += wordFrequency(word,title)
+	cWords = wordFrequency(title)
+        comedy.append(cWords)
+        count_list[0] += cWords
     for title in tragedies:
-        tragedy.append(wordFrequency(word,title))
-        count_list[1] += wordFrequency(word,title)
+	tWords = wordFrequency(title)
+        tragedy.append(tWords)
+        count_list[1] += tWords
     for title in histories:
-        history.append(wordFrequency(word,title))
-        count_list[2] += wordFrequency(word,title)
+	hWords = wordFrequency(title)
+        history.append(hWords)
+        count_list[2] += hWords
     final_list = []
     final_list.append(count_list)
     final_list.append(comedy)
@@ -93,14 +129,17 @@ def vocab():
     tragedy = []
     history = []
     for title in comedies:
-        comedy.append(numUniqueWords(title))
-        count_list[0] += numUniqueWords(title)
+	cWords = numUniqueWords(title)
+        comedy.append(cWords)
+        count_list[0] += cWords
     for title in tragedies:
-        tragedy.append(numUniqueWords(title))
-        count_list[1] += numUniqueWords(title)
+	tWords = numUniqueWords(title)
+        tragedy.append(tWords)
+        count_list[1] += tWords
     for title in histories:
-        history.append(numUniqueWords(title))
-        count_list[2] += numUniqueWords(title)
+	hWords = numUniqueWords(title)
+        history.append(hWords)
+        count_list[2] += hWords
     final_list = []
     final_list.append(count_list)
     final_list.append(comedy)
@@ -115,14 +154,17 @@ def count():
     tragedy = []
     history = []
     for title in comedies:
-        comedy.append(numWords(title))
-        count_list[0] += numWords(title)
+	cWords = numWords(title)
+        comedy.append(cWords)
+        count_list[0] += cWords
     for title in tragedies:
-        tragedy.append(numWords(title))
-        count_list[1] += numWords(title)
+	tWords = numWords(title)
+        tragedy.append(tWords)
+        count_list[1] += tWords
     for title in histories:
-        history.append(numWords(title))
-        count_list[2] += numWords(title)
+	hWords = numWords(title)
+        history.append(hWords)
+        count_list[2] += hWords
     final_list = []
     final_list.append(count_list)
     final_list.append(comedy)
