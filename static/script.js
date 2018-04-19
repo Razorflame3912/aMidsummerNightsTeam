@@ -6,6 +6,9 @@ var wordbar = document.getElementById("wordbar");
 var svg = document.getElementById("svg");
 var circs = document.getElementsByTagName("circle");
 var plays = $(".comedy, .tragedy, .history");
+var comedyplays = $(".comedy");
+var tragedyplays = $(".tragedy");
+var historyplays = $(".history");
 var circsizelist = [];
 var searchedword = "";
 var defaultlist = [1,1,1];
@@ -22,25 +25,38 @@ var circles = d3.select("#svg").selectAll("circle.category");
 var comedycircles = d3.select("#svg").selectAll("circle.comedy");
 var tragedycircles = d3.select("#svg").selectAll("circle.tragedy");
 var historycircles = d3.select("#svg").selectAll("circle.history");
+var playtitle = document.getElementById("playtitle");
+var val = document.getElementById("val");
+console.log(playtitle);
+var comedies = ["All's Well That Ends Well", "As You Like It", "The Comedy of Errors", "Cymbeline", "Love's Labour's Lost", "Measure For Measure", "The Merchant of Venice", "The Merry Wives of Windsor", "A Midsummer Night's Dream", "Much Ado About Nothing","The Taming of the Shrew", "The Tempest", "Troilus and Cressida", "Twelfth Night", "The Two Gentlemen of Verona", "The Winter's Tale"]
+
+var tragedies = ["Antony and Cleopatra", "Coriolanus", "Hamlet", "Julius Caesar", "King Lear", "Macbeth", "Othello", "Romeo and Juliet", "Timon of Athens", "Titus Andronicus"]
+
+var histories = ["Henry IV, Part 1", "Henry IV, Part 2", "Henry V", "Henry VI, Part 1", "Henry VI, Part 2", "Henry VI, Part 3", "Henry VIII", "King John","Richard II", "Richard III"]
 
 
 var numtopercent = function(list){
-    var total = 0;
+    var list2 = [];
     for(i in list){
-	total += list[i];
+	list2.push(list[i]);
+    }
+    
+    var total = 0;
+    for(i in list2){
+	total += list2[i];
     }
     if(total == 0){
 	var newlist = [];
-	for(var i = 0;i<list.length;i++){
+	for(var i = 0;i<list2.length;i++){
 	    newlist.push(-1);
 	}
 	return newlist;
     }
-    for(i in list){
-	list[i] = list[i]/total;
+    for(i in list2){
+	list2[i] = list2[i]/total;
     }
     //console.log(list);
-    return list;
+    return list2;
 }
 
 var calc = function(d,arg,mult,current,bigr,offx,offy){
@@ -315,6 +331,22 @@ var subupdate = function(type,data,offx,offy,bigr){
 		  current3 += d;
 		  return ret;
 	      }
+	     )
+    	.attr("val",
+	      function(d,i){
+		  var which = 0;
+		  if(type == "comedy"){
+		      which = 1;
+		  }
+		  else if(type == "tragedy"){
+		      which = 2;
+		  }
+		  else{
+		      which = 3;
+		  }
+		  console.log(variabledata[which][i]);
+		  return variabledata[which][i];
+	      }
 	     );
 
 }
@@ -348,7 +380,10 @@ var getinfo = function(e){
 
 var highlight = function(e){
     console.log(this.getAttribute("r"));
-    this.setAttribute("opacity","0.25");
+    console.log(this.getAttribute("id"));
+    this.setAttribute("opacity","0.5");
+    playtitle.innerHTML = this.getAttribute("id");
+    val.innerHTML = "Occurrences: " + this.getAttribute("val");
 	//e.stopPropagation();
 };
 
@@ -358,6 +393,19 @@ var dehighlight = function(e){
 	//e.stopPropagation();
 };
 //console.log(circs);
+
+for(var i = 0; i < comedyplays.length; i++){
+    comedyplays[i].setAttribute("id",comedies[i]);
+}
+
+for(var i = 0; i < tragedyplays.length; i++){
+    tragedyplays[i].setAttribute("id",tragedies[i]);
+}
+
+for(var i = 0; i < historyplays.length; i++){
+    historyplays[i].setAttribute("id",histories[i]);
+}
+
 for(var i = 0; i < plays.length; i++){
     console.log(plays[i]);
     //circs[i].addEventListener("mouseover",getinfo,true);
