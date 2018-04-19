@@ -37,3 +37,6 @@ changed radio buttons and added how to use
 marchiniM -- 2018-04-18 16:22:25
 Fixed backend to work with ajax calls and return lists for d3
 
+elsharawyM -- 2018-04-18 23:03:09
+merged d3 playground with main html framework, made ajax calls to fetch data
+
