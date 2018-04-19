@@ -130,7 +130,7 @@ def count():
     final_list.append(history)
     return json.dumps(final_list)
 
-print vocab()
+#print vocab()
 
 if __name__ == '__main__':
     app.debug = True
