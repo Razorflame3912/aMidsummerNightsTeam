@@ -51,6 +51,7 @@ def numUniqueWords(play):
         if (word not in words):
             words.append(word)
             count += 1
+    #print count
     return count 
 
     
@@ -129,7 +130,7 @@ def count():
     final_list.append(history)
     return json.dumps(final_list)
 
-
+print vocab()
 
 if __name__ == '__main__':
     app.debug = True

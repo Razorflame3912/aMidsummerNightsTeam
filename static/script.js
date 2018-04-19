@@ -1,6 +1,6 @@
 var defaultbutton = document.getElementById("default");
 var lengthbutton = document.getElementById("length");
-var vocabbutton = document.getElementById("vocab");
+//var vocabbutton = document.getElementById("vocab");
 var wordbutton = document.getElementById("word");
 var wordbar = document.getElementById("wordbar");
 var svg = document.getElementById("svg");
@@ -307,6 +307,6 @@ var subupdate = function(type,data,offx,offy,bigr){
 
 defaultbutton.addEventListener("click",update);
 lengthbutton.addEventListener("click",update);
-vocabbutton.addEventListener("click",update);
+//vocabbutton.addEventListener("click",update);
 wordbutton.addEventListener("click", update);
 wordbar.addEventListener("keydown", update);

@@ -40,3 +40,6 @@ Fixed backend to work with ajax calls and return lists for d3
 elsharawyM -- 2018-04-18 23:03:09
 merged d3 playground with main html framework, made ajax calls to fetch data
 
+elsharawyM -- 2018-04-18 23:28:46
+temporarily disabled word variety
+
