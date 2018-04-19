@@ -43,3 +43,6 @@ merged d3 playground with main html framework, made ajax calls to fetch data
 elsharawyM -- 2018-04-18 23:28:46
 temporarily disabled word variety
 
+elsharawyM -- 2018-04-19 00:27:26
+implemented basic hovering functionality
+

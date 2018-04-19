@@ -4,6 +4,8 @@ var lengthbutton = document.getElementById("length");
 var wordbutton = document.getElementById("word");
 var wordbar = document.getElementById("wordbar");
 var svg = document.getElementById("svg");
+var circs = document.getElementsByTagName("circle");
+var circsizelist = [];
 var searchedword = "";
 var defaultlist = [1,1,1];
 var sizelist = [150,0,60];
@@ -304,6 +306,22 @@ var subupdate = function(type,data,offx,offy,bigr){
     
 }
 
+var getinfo = function(e){
+    //circsizelist = [];
+    circsizelist.push(this.getAttribute("r"));
+    console.log(circsizelist);
+}
+
+var highlight = function(e){
+	console.log(this.getAttribute("r"));
+	//e.stopPropagation();
+};
+console.log(circs);
+for(var i = 0; i < circs.length; i++){
+    console.log(circs[i]);
+    //circs[i].addEventListener("mouseover",getinfo,true);
+    circs[i].addEventListener("mouseover",highlight,false);
+}
 
 defaultbutton.addEventListener("click",update);
 lengthbutton.addEventListener("click",update);
