@@ -73,7 +73,7 @@ var calc = function(d,arg,mult,current,bigr,offx,offy){
     console.log(y2);
     console.log(x3);
     console.log(y3);*/
-/*      var line1 = document.createElementNS("http://www.w3.org/2000/svg","line");
+     /*var line1 = document.createElementNS("http://www.w3.org/2000/svg","line");
 		  line1.setAttribute("x1",x1);
 		  line1.setAttribute("y1",y1);
 		  line1.setAttribute("x2",x2);
@@ -379,17 +379,43 @@ var getinfo = function(e){
 }
 
 var highlight = function(e){
-    console.log(this.getAttribute("r"));
-    console.log(this.getAttribute("id"));
-    this.setAttribute("opacity","0.5");
+    //console.log(this.getAttribute("r"));
+    //console.log(this.getAttribute("id"));
+    this.setAttribute("fill","rgba(50,50,50,0.5)");
+    this.setAttribute("stroke-width","4");
+    this.style.position = "relative";
+    this.style.zIndex = "1";
+    var text = document.createElementNS("http://www.w3.org/2000/svg","text");
+    text.setAttribute("x", this.getAttribute("cx"));
+    text.setAttribute("y", this.getAttribute("cy"));
+    //text.setAttribute("textLength", parseFloat(this.getAttribute("r"))*1.5);
+    text.setAttribute("lengthAdjust", "spacingAndGlyphs");
+    text.setAttribute("text-anchor","middle");
+    text.setAttribute("alignment-baseline","middle");
+    text.setAttribute("fill","#000000");
+    text.setAttribute("stroke","#000000");
+    text.setAttribute("stroke-width","1");
+    text.setAttribute("font-size", 3.25*parseFloat(this.getAttribute("r"))/this.getAttribute("id").length + "px");
+    text.setAttribute("id","selected");
+    text.innerHTML = this.getAttribute("id");
+    text.style.zIndex = "100";
+    //console.log(svg.childNodes[54]);
+
+    svg.insertBefore(text,this);
+    
+    
     playtitle.innerHTML = this.getAttribute("id");
     val.innerHTML = "Occurrences: " + this.getAttribute("val");
-	//e.stopPropagation();
+    e.stopPropagation();
 };
 
 var dehighlight = function(e){
     console.log(this.getAttribute("r"));
-    this.setAttribute("opacity","1");
+    this.setAttribute("fill","rgba(100,100,100,0.5)");
+    this.setAttribute("stroke-width","1.5");
+    this.style.position = "static";
+    this.style.zIndex = "-1";
+    svg.removeChild(document.getElementById("selected"));
 	//e.stopPropagation();
 };
 //console.log(circs);
@@ -407,11 +433,12 @@ for(var i = 0; i < historyplays.length; i++){
 }
 
 for(var i = 0; i < plays.length; i++){
-    console.log(plays[i]);
+    //console.log(plays[i]);
     //circs[i].addEventListener("mouseover",getinfo,true);
-    plays[i].addEventListener("mouseover",highlight,false);
-    plays[i].addEventListener("mouseout",dehighlight,false);
+    plays[i].style.zIndex = "-1";
 }
+    plays.mouseenter(highlight);
+    plays.mouseleave(dehighlight);
 
 defaultbutton.addEventListener("click",update);
 lengthbutton.addEventListener("click",update);
