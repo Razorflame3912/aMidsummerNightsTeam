@@ -353,10 +353,10 @@ var subupdate = function(type,data,offx,offy,bigr){
 
 var reorder = function(){
     var circlist = [];
-    while ($("circle").length > 0){
+    while ($(".comedy, .tragedy, .history").length > 0){
 	//console.log(document.getElementsByTagName("circle"));
 	//console.log(document.getElementsByTagName("circle").length);
-	circlist.push($("circle")[$("circle").length -1]);
+	circlist.push($(".comedy, .tragedy, .history")[$(".comedy, .tragedy, .history").length -1]);
 	console.log(circlist);
 	//console.log(svg.childNodes);
 	svg.removeChild(circlist[circlist.length-1]);
