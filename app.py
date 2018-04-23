@@ -60,7 +60,7 @@ def numUniqueWords(play):
 #---------------------------FLASK APP----------------------------
 
 @app.route('/')
-def root(): #root based on number of words total
+def root():
     return render_template('base.html')
 
 @app.route('/search')

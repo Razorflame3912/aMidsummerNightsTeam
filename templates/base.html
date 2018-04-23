@@ -4,6 +4,7 @@
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/base.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -28,8 +29,8 @@
   </head>
 
   <body style="background-color: #d9e6f2;">
-    <div class="container-fluid">     
-      <div class="col-sm-4">
+    <div class="container-fluid" id="main">     
+      <div class="col-sm-4" id="main-left">
 	
 	  <!------------------------Title---------------------------------->
 	  <div class="container-fluid bg-1 text-center">
@@ -43,6 +44,7 @@
 		  <button type="button" class="btn btn-primary" id="word">Search!</button>
 		</div>
 	      </div>
+	      <p id="status"></p>
 	  </div>
 	  <div class="container-fluid bg-3 text-center" style="font-family:roboto">
 	    <h3 style="font-family:roboto">ARRANGE BY:</h3>
@@ -60,20 +62,23 @@
 	  <div class="container-fluid bg-3 text-center" style="font-family:roboto">
 	    <h3 style="font-family:roboto">HOW TO USE:</h3>
 	    <p style="font-family:roboto">
-	      <ul>
+	      <ul id="uselist">
 		<li>To find relative count of a specific word, type your word into the search bar and click Search!</li>
 		<li>For other options, select a button and the circles will move accordingly.</li>
+		<li>Hover over a play to see its name and info!</li>
+		<li> Please note that overlapping plays are merely graphical and do not represent any "overlap" in the data.</li>
 		<li>Enjoy!</li>
 	      </ul>
-	      <br><br>
 	    </p>
 
-	    <h4 id="playtitle">Play Title</h4>
-	    <p id="val">Occurrences: </p>
-	    <br>
+	    <div id="infobox">
+	      <h4 id="playtitle"> </h4>
+	      <p id="val"> </p>
+	      <br>
+	    </div>
 	  </div>
       </div>
-      <div class="col-sm-8">
+      <div class="col-sm-8" id="main-right">
 	<!---------d3 html----------------->
 	<svg height="750" width="750" id="svg" xlmns="http://www.w3.org/2000/svg">
 	  <circle id="main" cy="375" cx="375" r="375" fill="white" stroke="black"></circle>

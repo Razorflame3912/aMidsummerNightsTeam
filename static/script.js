@@ -26,6 +26,7 @@ var comedycircles = d3.select("#svg").selectAll("circle.comedy");
 var tragedycircles = d3.select("#svg").selectAll("circle.tragedy");
 var historycircles = d3.select("#svg").selectAll("circle.history");
 var playtitle = document.getElementById("playtitle");
+var searchinfo = document.getElementById("status");
 var val = document.getElementById("val");
 console.log(playtitle);
 var comedies = ["All's Well That Ends Well", "As You Like It", "The Comedy of Errors", "Cymbeline", "Love's Labour's Lost", "Measure For Measure", "The Merchant of Venice", "The Merry Wives of Windsor", "A Midsummer Night's Dream", "Much Ado About Nothing","The Taming of the Shrew", "The Tempest", "Troilus and Cressida", "Twelfth Night", "The Two Gentlemen of Verona", "The Winter's Tale"]
@@ -157,8 +158,9 @@ var update = function(e){
 	var icx = 0;
 	var icy = 0;
 	var ir = 0;
-	searchedword = wordbar.value;
 	if(this.getAttribute("id") == "default"){
+	    searchedword = "def";
+	    searchinfo.innerHTML = 'Plays set to equal values';
 	    data = numtopercent(defaultlist);
 	    comedydata = numtopercent(defcomedy);
 	    tragedydata = numtopercent(deftragedy);
@@ -166,6 +168,8 @@ var update = function(e){
 	}
 	else{
 	    if (this.getAttribute("id") == "length"){
+		searchedword = "";
+		searchinfo.innerHTML = 'Results by overall word count';
 		$.ajax({
 		    async: false,
 		    url: '/count',
@@ -190,6 +194,8 @@ var update = function(e){
 		});//end ajax call
 	    }
 	    else{
+		searchedword = wordbar.value;
+		searchinfo.innerHTML = 'Results for: "' + searchedword + '"';
 		$.ajax({
 		    async: false,
 		    url: '/search',
@@ -405,7 +411,29 @@ var highlight = function(e){
     
     
     playtitle.innerHTML = this.getAttribute("id");
-    val.innerHTML = "Occurrences: " + this.getAttribute("val");
+    
+    //console.log(searchedword.length);
+    if(searchedword.length == 0){
+	//console.log("Total words: " + this.getAttribute("val"));
+	console.log(val);
+	var stuff = "Total words: " + this.getAttribute("val");
+	val.innerHTML = stuff;
+    }
+    else if(searchedword == "def"){
+	val.innerHTML = "";
+    }
+    else{
+	val.innerHTML = 'Occurrences of ' + '"' + searchedword + '": ' + this.getAttribute("val");
+    }
+    if(this.className["baseVal"].includes("comedy")){
+	playtitle.style.color = "green";
+    }
+    else if(this.className["baseVal"].includes("tragedy")){
+	playtitle.style.color = "crimson";
+    }
+    else{
+	playtitle.style.color = "blue";
+    }
     e.stopPropagation();
 };
 
