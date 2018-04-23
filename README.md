@@ -24,5 +24,5 @@ Furthermore, more questions can arise, such as:
 ## D3 Features
 * Transitions will be used for prettiness. :)
 * Data marriage with elements will be used from the data we collect. (Most likely searching for a word or statistic will return a dictionary of plays and word counts, creating a list from that to be used to adjust circle sizes)
-* More specifically: Word frequency -> size (or other stats), Vocabulary range -> color darkness.
+* More specifically: Word frequency -> size (or other stats)
 
